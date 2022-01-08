@@ -12,7 +12,7 @@ class LoadingWidget extends StatelessWidget {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          color: Colors.grey.withOpacity(0.5),
+          color: Colors.grey.withOpacity(0.1),
           child: Center(child: CustomProgressIndicator()),
         ));
   }

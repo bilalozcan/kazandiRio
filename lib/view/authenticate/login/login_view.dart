@@ -4,6 +4,7 @@ import 'package:kazandirio/view/authenticate/verification/verification_view.dart
 import 'package:kazandirio/widgets/custom_button.dart';
 import 'package:kazandirio/widgets/custom_text.dart';
 import 'package:kazandirio/widgets/custom_text_form_field.dart';
+import 'package:kazandirio/widgets/loading_widget.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:stacked/stacked.dart';
 
@@ -43,12 +44,12 @@ class LoginView extends StatelessWidget {
                             ],
                           ),
                           CustomTextFormField(
-                            TextEditingController(),
+                            viewModel.phoneController,
                             hintText: '(5 _ _ )  _ _ _   _ _   _ _',
                             textInputType: TextInputType.phone,
                           ),
                           CustomButton(
-                            onPressed: () => context.navigateTo(VerificationView()),
+                            onPressed: () => viewModel.login(),
                             text: 'Giriş yap',
                             height: context.dhExceptStatusBar(0.08),
                             textColor: Colors.white,
@@ -67,6 +68,7 @@ class LoginView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  LoadingWidget(viewModel.isLoading)
                 ],
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:kazandirio/core/constant/enum/network_enum.dart';
 import 'package:kazandirio/core/extension/network_extension.dart';
 import 'package:kazandirio/core/init/network/network_manager.dart';
 import 'package:kazandirio/model/login_response.dart';
+import 'package:kazandirio/model/user.dart';
 import 'package:kazandirio/model/validate_response.dart';
 
 class AuthService {
@@ -23,7 +24,10 @@ class AuthService {
   Future<ValidateResponse?> validate(
           String phoneNumber, String validationCode) async =>
       await _networkManager!.post(
-          Network.LOGIN.value,
+          Network.VALIDATE.value,
           {'phoneNumber': phoneNumber, 'validationCode': validationCode},
           ValidateResponse());
+
+  Future<User?> getProfile() async =>
+      await _networkManager!.get(Network.PROFILE.value, User());
 }

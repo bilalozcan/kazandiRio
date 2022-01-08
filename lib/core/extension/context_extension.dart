@@ -29,6 +29,8 @@ extension ContextExtension on BuildContext {
 
   Future navigateToReplacement(Widget widget) async =>
       Navigator.pushReplacement(this, MaterialPageRoute(builder: (context) => widget));
+  Future navigateToRemoveUntil(Widget widget) async =>
+      Navigator.pushAndRemoveUntil(this, MaterialPageRoute(builder: (context) => widget),(r) => false);
 
   // String formatDateToTime(DateTime? dateTime) =>
   //     formatDate(dateTime!, [HH, ':', nn],
