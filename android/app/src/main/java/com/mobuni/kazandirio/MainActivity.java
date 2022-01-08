@@ -1,4 +1,4 @@
-package com.mobuni.kazandirio.kazandirio;
+package com.mobuni.kazandirio;
 
 import io.flutter.embedding.android.FlutterActivity;
 

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:370290912887:android:d7749408e72795f58a2072",
+        "mobilesdk_app_id": "1:370290912887:android:82de4d187a3ed4df8a2072",
         "android_client_info": {
-          "package_name": "com.mobuni.kazandirio.kazandirio"
+          "package_name": "com.mobuni.kazandirio"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "370290912887-1joqor90bq6lbg492kendocn4h08bogv.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "370290912887-2c9ovq77pd119co16rf9aesgtpnqb3o2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mobuni.kazandirio.kazandirio"
+              }
             }
           ]
         }
