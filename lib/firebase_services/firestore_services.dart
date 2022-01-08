@@ -22,6 +22,9 @@ class FirestoreServiceApp {
   Stream getLivesUserStream(String id){
     return firestore.collection('eventLive').doc(id).collection('users').snapshots();
   }
+  Future<QuerySnapshot<Map<String, dynamic>>> getLivesUserStreamCode(String id,String userId){
+    return firestore.collection('eventLive').doc(id).collection('live').where('senderId',isNotEqualTo:userId ).where('status',isEqualTo: true).get();
+  }
   addMessage(Map<String,dynamic> map, String eventId,String codeId,String userId)async{
     firestore.collection('eventLive').doc(eventId).collection('live').add(map);
     await firestore.collection('usersCode').doc(userId).collection('codes').doc(codeId).update({
@@ -42,6 +45,11 @@ class FirestoreServiceApp {
 
   Future<QuerySnapshot<Map<String, dynamic>>> getQuestion(String category)async{
     return firestore.collection('question').where('category',isEqualTo: category).get();
+  }
+  
+  addCodeUser(Map<String,dynamic> map,String userId)async{
+   await firestore.collection('usersCode').doc(userId).collection('codes').doc(map['id']).set(map);
+    
   }
   //final NetworkManager _networkManager = NetworkManager.instance!;
 
