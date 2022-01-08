@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kazandirio/model/campaign.dart';
+import 'package:kazandirio/view/authenticate/register/register_view.dart';
+import 'package:kazandirio/view/campaign_detail/campaign_detail_view.dart';
 import 'package:kazandirio/widgets/custom_button.dart';
 import 'package:kazandirio/widgets/custom_progress_indicator.dart';
 import 'package:kazandirio/widgets/custom_text.dart';
@@ -35,7 +37,7 @@ class CampaignsView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: CustomButton(
-                    onPressed: () {},
+                    onPressed: () => context.navigateTo(RegisterView()),
                     backgroundColor: Color(0xff2751B8),
                     width: context.dynamicWidth(0.23),
                     child: Row(
@@ -77,45 +79,50 @@ class CampaignsView extends StatelessWidget {
   Widget CampaignsWidget(BuildContext context, Campaign campaign) {
     return Padding(
       padding: const EdgeInsets.only(right: 14),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: context.dhExceptStatusBarAppBar(0.6),
-            width: context.dynamicWidth(0.75),
-            decoration: BoxDecoration(
+      child: InkWell(
+        onTap: () =>
+            context.navigateTo(CampaignDetailView(campaignId: campaign.id!)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: context.dhExceptStatusBarAppBar(0.6),
+              width: context.dynamicWidth(0.75),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(10)),
+                  image: DecorationImage(
+                      image: NetworkImage(campaign.imageUrl!),
+                      fit: BoxFit.fill)),
+            ),
+            Container(
+              height: context.dhExceptStatusBarAppBar(0.1),
+              width: context.dynamicWidth(0.75),
+              decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    topLeft: Radius.circular(10)),
-                image: DecorationImage(
-                    image: NetworkImage(campaign.imageUrl!), fit: BoxFit.fill)),
-          ),
-          Container(
-            height: context.dhExceptStatusBarAppBar(0.1),
-            width: context.dynamicWidth(0.75),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(campaign.name!, fontWeight: FontWeight.bold),
-                  CustomText(
-                    '${context.customFormatDate2(campaign.campaignStartDate)} - ${context.customFormatDate2(campaign.campaignEndDate)}',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ],
+                    bottomRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10)),
               ),
-            ),
-          )
-        ],
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(campaign.name!, fontWeight: FontWeight.bold),
+                    CustomText(
+                      '${context.customFormatDate2(campaign.campaignStartDate)} - ${context.customFormatDate2(campaign.campaignEndDate)}',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -12,5 +12,5 @@ abstract class CustomBaseViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void initialize(BuildContext context);
+  // void initialize(BuildContext context);
 }

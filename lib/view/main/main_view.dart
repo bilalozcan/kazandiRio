@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kazandirio/view/campaigns/campaigns_view.dart';
+import 'package:kazandirio/view/wallet/wallet_view.dart';
 import 'package:stacked/stacked.dart';
 
 import 'main_view_model.dart';
@@ -43,7 +44,7 @@ class MainView extends StatelessWidget {
       case 1:
         return Center(child: Text('QR'));
       case 2:
-        return Center(child: Text('Cüzdanım'));
+        return WalletView();
       default:
         return SizedBox();
     }

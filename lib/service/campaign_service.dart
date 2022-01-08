@@ -17,4 +17,7 @@ class CampaignService {
 
   Future<List<Campaign>?> getCampaigns() async =>
       await _networkManager!.get(Network.CAMPAIGNS.value, Campaign());
+
+  Future<Campaign?> getCampaign(String id) async =>
+      await _networkManager!.get(Network.CAMPAIGNS.value + '/$id', Campaign());
 }

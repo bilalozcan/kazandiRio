@@ -5,7 +5,8 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String? hintText;
   final IconData? icon;
-  const CustomTextFormField(this.controller,{Key? key, this.hintText, this.icon}) : super(key: key);
+  final TextInputType? textInputType;
+  const CustomTextFormField(this.controller,{Key? key, this.hintText, this.icon, this.textInputType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
                 borderSide:
                 BorderSide(color: context.themeData.colorScheme.primaryVariant))
         ),
+        keyboardType: textInputType ?? null,
       ),
     );
   }

@@ -17,6 +17,9 @@ class Campaign extends BaseModel{
     this.homePageOrder,
     this.campaignStartDate,
     this.campaignEndDate,
+    this.descriptionHeader,
+    this.descriptionBody,
+    this.isMapVisible
   });
 
   String? id;
@@ -30,6 +33,9 @@ class Campaign extends BaseModel{
   int? homePageOrder;
   DateTime? campaignStartDate;
   DateTime? campaignEndDate;
+  String? descriptionHeader;
+  String? descriptionBody;
+  bool? isMapVisible;
 
   factory Campaign.fromJson(Map<String, dynamic> json) => _$CampaignFromJson(json);
 

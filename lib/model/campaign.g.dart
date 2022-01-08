@@ -22,6 +22,9 @@ Campaign _$CampaignFromJson(Map<String, dynamic> json) => Campaign(
       campaignEndDate: json['campaignEndDate'] == null
           ? null
           : DateTime.parse(json['campaignEndDate'] as String),
+      descriptionHeader: json['descriptionHeader'] as String?,
+      descriptionBody: json['descriptionBody'] as String?,
+      isMapVisible: json['isMapVisible'] as bool?,
     );
 
 Map<String, dynamic> _$CampaignToJson(Campaign instance) => <String, dynamic>{
@@ -36,4 +39,7 @@ Map<String, dynamic> _$CampaignToJson(Campaign instance) => <String, dynamic>{
       'homePageOrder': instance.homePageOrder,
       'campaignStartDate': instance.campaignStartDate?.toIso8601String(),
       'campaignEndDate': instance.campaignEndDate?.toIso8601String(),
+      'descriptionHeader': instance.descriptionHeader,
+      'descriptionBody': instance.descriptionBody,
+      'isMapVisible': instance.isMapVisible,
     };
