@@ -39,6 +39,10 @@ class FirestoreServiceApp {
   Future getUserCode(String userId)async{
     return await firestore.collection('usersCode').doc(userId).collection('codes').where('status',isEqualTo: true).get();
   }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getQuestion(String category)async{
+    return firestore.collection('question').where('category',isEqualTo: category).get();
+  }
   //final NetworkManager _networkManager = NetworkManager.instance!;
 
 }
