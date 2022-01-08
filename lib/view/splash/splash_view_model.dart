@@ -18,6 +18,7 @@ class SplashViewModel extends CustomBaseViewModel {
       var result = await AuthService.instance!.getProfile();
       if (result != null) {
         BaseData.instance?.user = result;
+        print(result.toJson());
       }
     }
     context.navigateToReplacement(MainView());}
