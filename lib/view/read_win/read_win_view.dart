@@ -49,6 +49,7 @@ class ReadWinView extends StatelessWidget {
                           text: 'Kazan',
                           height: context.dhExceptStatusBar(0.08),
                           textColor: Colors.white,
+                          backgroundColor: Color(0xff2751B8),
                         )
                       ],
                     ),

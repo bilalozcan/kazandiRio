@@ -50,6 +50,8 @@ dependencies:
   social_login_buttons: ^1.0.6
   bubble: ^1.2.1
   hexcolor: ^2.0.5
+  circular_countdown_timer: ^0.2.0
+  font_awesome_flutter: ^9.2.0
 
 
 

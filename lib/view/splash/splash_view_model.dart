@@ -6,8 +6,10 @@ import 'package:kazandirio/core/extension/context_extension.dart';
 import 'package:kazandirio/core/init/cache/locale_manager.dart';
 import 'package:kazandirio/service/auth_service.dart';
 import 'package:kazandirio/view/event/evet_view.dart';
+import 'package:kazandirio/view/leader_board/leader_board_view.dart';
 import 'package:kazandirio/view/main/main_view.dart';
 import 'package:kazandirio/core/extension/locale_extension.dart';
+import 'package:kazandirio/view/game_new/game_new_view.dart';
 
 class SplashViewModel extends CustomBaseViewModel {
   @override
@@ -21,5 +23,8 @@ class SplashViewModel extends CustomBaseViewModel {
         print(result.toJson());
       }
     }
-    context.navigateToReplacement(MainView());}
+    // context.navigateToReplacement(MainView());
+    // context.navigateToReplacement(GameNewView(rivalUserId: ''));
+    context.navigateToReplacement(LeaderBoardView());
+  }
 }
