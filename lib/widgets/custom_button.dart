@@ -29,7 +29,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? context.dynamicWidth(1),
-      height: height,
+      height: height ,
       padding: EdgeInsets.symmetric(vertical: 4),
       child: ElevatedButton(
           onPressed: onPressed ?? () {},
@@ -40,7 +40,7 @@ class CustomButton extends StatelessWidget {
               primary: backgroundColor ?? context.themeData.colorScheme.primaryVariant,
               elevation: 0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ))),
     );
   }

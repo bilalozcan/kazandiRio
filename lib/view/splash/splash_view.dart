@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kazandirio/widgets/custom_progress_indicator.dart';
 import 'package:stacked/stacked.dart';
-
 import 'splash_view_model.dart';
 
 class SplashView extends StatelessWidget {
@@ -13,7 +11,9 @@ class SplashView extends StatelessWidget {
         viewModelBuilder: () => SplashViewModel(),
         onModelReady: (viewModel) => viewModel.initialize(context),
         builder: (context, viewModel, child) {
-          return Scaffold(body: Center(child: CustomProgressIndicator()));
+          return Scaffold(
+              backgroundColor: Color(0xff0C2D83),
+              body: Center(child: Image.asset('assets/icon.png')));
         });
   }
 }
