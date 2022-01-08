@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kazandirio/view/campaigns/campaigns_view.dart';
+import 'package:kazandirio/view/read_win/read_win_view.dart';
 import 'package:kazandirio/view/wallet/wallet_view.dart';
 import 'package:stacked/stacked.dart';
 
@@ -42,7 +43,7 @@ class MainView extends StatelessWidget {
       case 0:
         return CampaignsView();
       case 1:
-        return Center(child: Text('QR'));
+        return ReadWinView();
       case 2:
         return WalletView();
       default:

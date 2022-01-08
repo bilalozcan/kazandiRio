@@ -2,5 +2,7 @@ enum Network {
   LOGIN,
   VALIDATE,
   PROFILE,
-  CAMPAIGNS
+  CAMPAIGNS,
+  CODE,
+  REDEEM
 }

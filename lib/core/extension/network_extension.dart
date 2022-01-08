@@ -11,6 +11,10 @@ extension NetworkExtension on Network {
         return '/auth/profile';
       case Network.CAMPAIGNS:
         return '/campaigns';
+      case Network.CODE:
+        return '/code/';
+      case Network.REDEEM:
+        return '/redeem';
       default:
         return '';
     }
