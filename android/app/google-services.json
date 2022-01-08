@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "370290912887",
-    "project_id": "kazandirio-16f07",
-    "storage_bucket": "kazandirio-16f07.appspot.com"
+    "project_number": "933637299929",
+    "project_id": "kazandirio-mobuni",
+    "storage_bucket": "kazandirio-mobuni.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:370290912887:android:82de4d187a3ed4df8a2072",
+        "mobilesdk_app_id": "1:933637299929:android:c207ebcd2b9aa87479a8c8",
         "android_client_info": {
           "package_name": "com.mobuni.kazandirio"
         }
       },
       "oauth_client": [
         {
-          "client_id": "370290912887-1joqor90bq6lbg492kendocn4h08bogv.apps.googleusercontent.com",
+          "client_id": "933637299929-s8lc6a2b7fijccghf6dq3s4n95evadok.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBaefxhE_rSN_psxp0c-pBxhetjhLRGGV4"
+          "current_key": "AIzaSyA2R1Kz1AG0WgtIuOYPYoIBbb4qqNUNC-8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "370290912887-1joqor90bq6lbg492kendocn4h08bogv.apps.googleusercontent.com",
+              "client_id": "933637299929-s8lc6a2b7fijccghf6dq3s4n95evadok.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "370290912887-2c9ovq77pd119co16rf9aesgtpnqb3o2.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.mobuni.kazandirio.kazandirio"
-              }
             }
           ]
         }

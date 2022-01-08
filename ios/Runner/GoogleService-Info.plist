@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>370290912887-2i3c9j8o30ele60c9m1rej8pb9vaa4hr.apps.googleusercontent.com</string>
+	<string>933637299929-658oo3jpqhud9bamr7sigmushv05cpvu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.370290912887-2i3c9j8o30ele60c9m1rej8pb9vaa4hr</string>
+	<string>com.googleusercontent.apps.933637299929-658oo3jpqhud9bamr7sigmushv05cpvu</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD30fJU80aXEdV5pDDaK4PoMoR91Sh7148</string>
+	<string>AIzaSyArS-jx7mc2hMnZlj59R1x35tvy_phjJHw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>370290912887</string>
+	<string>933637299929</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.mobuni.kazandirio</string>
 	<key>PROJECT_ID</key>
-	<string>kazandirio-16f07</string>
+	<string>kazandirio-mobuni</string>
 	<key>STORAGE_BUCKET</key>
-	<string>kazandirio-16f07.appspot.com</string>
+	<string>kazandirio-mobuni.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:370290912887:ios:2f33bd5c5a6840938a2072</string>
+	<string>1:933637299929:ios:7e9e99aab42f320a79a8c8</string>
 </dict>
 </plist>

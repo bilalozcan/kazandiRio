@@ -23,8 +23,8 @@ class SplashViewModel extends CustomBaseViewModel {
         print(result.toJson());
       }
     }
-    // context.navigateToReplacement(MainView());
+    context.navigateToReplacement(MainView());
     // context.navigateToReplacement(GameNewView(rivalUserId: ''));
-    context.navigateToReplacement(LeaderBoardView());
+    // context.navigateToReplacement(LeaderBoardView());
   }
 }

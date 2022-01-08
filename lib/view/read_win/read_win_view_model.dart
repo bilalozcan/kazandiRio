@@ -24,6 +24,6 @@ class ReadWinViewModel extends CustomBaseViewModel {
     } else {
       Fluttertoast.showToast(msg: 'Lütfen şifre giriniz');
     }
-    isLoading = true;
+    isLoading = false;
   }
 }
