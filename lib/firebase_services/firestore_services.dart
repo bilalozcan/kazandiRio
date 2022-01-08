@@ -16,6 +16,12 @@ class FirestoreServiceApp {
   Stream getEventsStream(){
     return firestore.collection('events').snapshots();
   }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getGameRooms() {
+    return  firestore.collection('gameRoom').where('status',isEqualTo: 'search').snapshots();
+  }
+  Stream getGameRoom(String id){
+    return firestore.collection('gameRoom').doc(id).snapshots();
+  }
   Stream getLivesStream(String id){
     return firestore.collection('eventLive').doc(id).collection('live').orderBy('date',descending: true).snapshots();
   }
@@ -28,7 +34,7 @@ class FirestoreServiceApp {
   addMessage(Map<String,dynamic> map, String eventId,String codeId,String userId)async{
     firestore.collection('eventLive').doc(eventId).collection('live').add(map);
     await firestore.collection('usersCode').doc(userId).collection('codes').doc(codeId).update({
-      'status':false,
+      'status':true,
     });
   }
   addEventUser( String eventId,String userId)async{

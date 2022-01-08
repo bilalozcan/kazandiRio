@@ -33,6 +33,7 @@ class EventView extends StatelessWidget {
               body: StreamBuilder(
                 stream: viewModel.firestoreService.getEventsStream(),
                 builder: (context, dynamic sn) {
+
                   var data = [];
                   if (sn.hasData) {
                     data = sn.data.docs;

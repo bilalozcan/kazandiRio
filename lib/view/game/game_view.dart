@@ -15,8 +15,9 @@ class GameView extends StatelessWidget {
     String name2 = 'Mehmet';
     return ViewModelBuilder<GameViewModel>.reactive(
         viewModelBuilder: () => GameViewModel(),
-        onModelReady: (model)=>model.init(evetId),
+        onModelReady: (model)=>model.init(evetId,context),
         builder: (context, viewModel, child) {
+          // viewModel.init(evetId,context);
           return SafeArea(
             child: Scaffold(
               body: Column(
@@ -57,7 +58,7 @@ class GameView extends StatelessWidget {
                         viewModel.initialised?Container(
                             alignment: Alignment.center,
                             width: context.dynamicWidth(0.425),
-                            child: Text(viewModel.rivalUser['username'],
+                            child: Text('dsfsd',
                                 style: Theme.of(context).textTheme.headline6?.copyWith(color: Color(0xff4d81d7)))):
                         Container(
                             alignment: Alignment.center,

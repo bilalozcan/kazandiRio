@@ -7,14 +7,14 @@ import 'package:kazandirio/widgets/custom_text.dart';
 import 'package:stacked/stacked.dart';
 
 class GameNewView extends StatelessWidget {
-  const GameNewView({Key? key, required this.rivalUserId}) : super(key: key);
-  final String rivalUserId;
+  const GameNewView({Key? key, required this.gameRoomId}) : super(key: key);
+  final String gameRoomId;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<GameNewViewModel>.reactive(
         viewModelBuilder: () => GameNewViewModel(),
-        onModelReady: (model) => model.init(rivalUserId, 'spor'),
+        onModelReady: (model) => model.init( 'spor'),
         builder: (context, viewModel, child) {
           return Scaffold(
               backgroundColor: Color(0xffEEEEEE),
@@ -36,119 +36,243 @@ class GameNewView extends StatelessWidget {
                 ],
               ),
               body: viewModel.initialised
-                  ? Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            CircularCountDownTimer(
-                              duration: 10,
-                              initialDuration: 0,
-                              controller: CountDownController(),//viewModel.countDownController,
-                              width: context.dhExceptStatusBarAppBar(0.1),
-                              height: context.dhExceptStatusBarAppBar(0.1),
-                              ringColor: Colors.grey.shade200,
-                              ringGradient: null,
-                              fillColor: Color(0xff2751B8).withAlpha(120),
-                              fillGradient: null,
-                              backgroundColor: Color(0xff2751B8),
-                              backgroundGradient: null,
-                              strokeWidth: 20.0,
-                              strokeCap: StrokeCap.round,
-                              textStyle: TextStyle(
-                                  fontSize: 33.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                              textFormat: CountdownTextFormat.S,
-                              isReverse: true,
-                              isReverseAnimation: false,
-                              isTimerTextShown: true,
-                              autoStart: true,
-                              onStart: () {
-                                // viewModel.countDownController.start();
-                              },
-                              onComplete: () {
-                                print('Countdown Ended');
-                              },
-                            ),
-                            Container(
-                              width: context.dynamicWidth(0.85),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color(0xff2751B8).withOpacity(0.5),
-                                      offset: Offset(5, 5))
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  children: [
-                                    CustomText(
-                                      viewModel.question['title'],
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    ...(viewModel.question['stylish'] as List)
-                                        .map((e) {
-                                      var index = (viewModel.question['stylish']
-                                              as List)
-                                          .indexOf(e);
-                                      return InkWell(
-                                        onTap: () {
-                                          print('a');
-                                          if (!viewModel.isSelected) {
-                                            viewModel.selectedIndex = index;
-                                            viewModel.isSelected = true;
-                                          }
-                                        },
-                                        splashColor: HexColor('FFCC3D'),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    viewModel.selectedIndex ==
-                                                            index
-                                                        ? Colors.grey
-                                                        : HexColor('2751B8'),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10))),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: CustomText(
-                                                      e,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Image.asset('assets/icon.png', scale: 2.9,)
-                          ],
-                        ),
-                      ),
-                    )
+                  ? StreamBuilder(
+                  stream: viewModel.firestoreService.getGameRoom(gameRoomId),
+                  builder: (context,dynamic sn){
+                    var data ;
+                    if (sn.hasData) {
+                      data = sn.data.data();
+                    }
+                 return data['status']=='GAME'? Padding(
+                   padding: const EdgeInsets.all(15.0),
+                   child: Container(
+                     width: double.infinity,
+                     height: double.infinity,
+                     child: Column(
+                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                       children: [
+                         CircularCountDownTimer(
+                           duration: 10,
+                           initialDuration: 0,
+                           controller: CountDownController(),//viewModel.countDownController,
+                           width: context.dhExceptStatusBarAppBar(0.1),
+                           height: context.dhExceptStatusBarAppBar(0.1),
+                           ringColor: Colors.grey.shade200,
+                           ringGradient: null,
+                           fillColor: Color(0xff2751B8).withAlpha(120),
+                           fillGradient: null,
+                           backgroundColor: Color(0xff2751B8),
+                           backgroundGradient: null,
+                           strokeWidth: 20.0,
+                           strokeCap: StrokeCap.round,
+                           textStyle: TextStyle(
+                               fontSize: 33.0,
+                               color: Colors.white,
+                               fontWeight: FontWeight.bold),
+                           textFormat: CountdownTextFormat.S,
+                           isReverse: true,
+                           isReverseAnimation: false,
+                           isTimerTextShown: true,
+                           autoStart: true,
+                           onStart: () {
+                             // viewModel.countDownController.start();
+                           },
+                           onComplete: () {
+                             print('Countdown Ended');
+                           },
+                         ),
+                         Container(
+                           width: context.dynamicWidth(0.85),
+                           decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(15),
+                             color: Colors.white,
+                             boxShadow: [
+                               BoxShadow(
+                                   color: Color(0xff2751B8).withOpacity(0.5),
+                                   offset: Offset(5, 5))
+                             ],
+                           ),
+                           child: Padding(
+                             padding: const EdgeInsets.all(16.0),
+                             child: Column(
+                               children: [
+                                 CustomText(
+                                   viewModel.question['title'],
+                                   color: Colors.black,
+                                   fontWeight: FontWeight.w500,
+                                   fontSize: 20,
+                                   textAlign: TextAlign.center,
+                                 ),
+                                 ...(viewModel.question['stylish'] as List)
+                                     .map((e) {
+                                   var index = (viewModel.question['stylish']
+                                   as List)
+                                       .indexOf(e);
+                                   return InkWell(
+                                     onTap: () {
+                                       print('a');
+                                       if (!viewModel.isSelected) {
+                                         viewModel.selectedIndex = index;
+                                         viewModel.isSelected = true;
+                                       }
+                                     },
+                                     splashColor: HexColor('FFCC3D'),
+                                     child: Padding(
+                                       padding: const EdgeInsets.all(8.0),
+                                       child: Container(
+                                         decoration: BoxDecoration(
+                                             color:
+                                             viewModel.selectedIndex ==
+                                                 index
+                                                 ? Colors.grey
+                                                 : HexColor('2751B8'),
+                                             borderRadius: BorderRadius.all(
+                                                 Radius.circular(10))),
+                                         child: Row(
+                                           children: [
+                                             Container(
+                                               child: Padding(
+                                                 padding:
+                                                 const EdgeInsets.all(
+                                                     8.0),
+                                                 child: CustomText(
+                                                   e,
+                                                   color: Colors.white,
+                                                 ),
+                                               ),
+                                             ),
+                                           ],
+                                         ),
+                                       ),
+                                     ),
+                                   );
+                                 }).toList(),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Image.asset('assets/icon.png', scale: 2.9,)
+                       ],
+                     ),
+                   ),
+                 )
+                     :Padding(
+                   padding: const EdgeInsets.all(15.0),
+                   child: Container(
+                     width: double.infinity,
+                     height: double.infinity,
+                     child: Column(
+                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                       children: [
+                         CircularCountDownTimer(
+                           duration: 10,
+                           initialDuration: 0,
+                           controller: CountDownController(),//viewModel.countDownController,
+                           width: context.dhExceptStatusBarAppBar(0.1),
+                           height: context.dhExceptStatusBarAppBar(0.1),
+                           ringColor: Colors.grey.shade200,
+                           ringGradient: null,
+                           fillColor: Color(0xff2751B8).withAlpha(120),
+                           fillGradient: null,
+                           backgroundColor: Color(0xff2751B8),
+                           backgroundGradient: null,
+                           strokeWidth: 20.0,
+                           strokeCap: StrokeCap.round,
+                           textStyle: TextStyle(
+                               fontSize: 33.0,
+                               color: Colors.white,
+                               fontWeight: FontWeight.bold),
+                           textFormat: CountdownTextFormat.S,
+                           isReverse: true,
+                           isReverseAnimation: false,
+                           isTimerTextShown: true,
+                           autoStart: true,
+                           onStart: () {
+                             // viewModel.countDownController.start();
+                           },
+                           onComplete: () {
+                             viewModel.firestoreService.firestore.collection('gameRoom').doc(gameRoomId).set({
+                               'status':'TIMEOFF'
+                             });
+                             print('Countdown Ended');
+                           },
+                         ),
+                         Container(
+                           width: context.dynamicWidth(0.85),
+                           decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(15),
+                             color: Colors.white,
+                             boxShadow: [
+                               BoxShadow(
+                                   color: Color(0xff2751B8).withOpacity(0.5),
+                                   offset: Offset(5, 5))
+                             ],
+                           ),
+                           child: Padding(
+                             padding: const EdgeInsets.all(16.0),
+                             child: Column(
+                               children: [
+                                 CustomText(
+                                   viewModel.question['title'],
+                                   color: Colors.black,
+                                   fontWeight: FontWeight.w500,
+                                   fontSize: 20,
+                                   textAlign: TextAlign.center,
+                                 ),
+                                 ...(viewModel.question['stylish'] as List)
+                                     .map((e) {
+                                   var index = (viewModel.question['stylish']
+                                   as List)
+                                       .indexOf(e);
+                                   return InkWell(
+                                     onTap: () {
+                                       print('a');
+                                       if (!viewModel.isSelected) {
+                                         viewModel.selectedIndex = index;
+                                         viewModel.isSelected = true;
+                                       }
+                                     },
+                                     splashColor: HexColor('FFCC3D'),
+                                     child: Padding(
+                                       padding: const EdgeInsets.all(8.0),
+                                       child: Container(
+                                         decoration: BoxDecoration(
+                                             color:
+                                             viewModel.selectedIndex ==
+                                                 index
+                                                 ? Colors.grey
+                                                 : HexColor('2751B8'),
+                                             borderRadius: BorderRadius.all(
+                                                 Radius.circular(10))),
+                                         child: Row(
+                                           children: [
+                                             Container(
+                                               child: Padding(
+                                                 padding:
+                                                 const EdgeInsets.all(
+                                                     8.0),
+                                                 child: CustomText(
+                                                   e,
+                                                   color: Colors.white,
+                                                 ),
+                                               ),
+                                             ),
+                                           ],
+                                         ),
+                                       ),
+                                     ),
+                                   );
+                                 }).toList(),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Image.asset('assets/icon.png', scale: 2.9,)
+                       ],
+                     ),
+                   ),
+                 );
+              })
                   : Center(
                       child: CircularProgressIndicator(),
                     ));

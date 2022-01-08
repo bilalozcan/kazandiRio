@@ -24,7 +24,7 @@ class GameNewViewModel extends BaseViewModel{
 
   var question;
 
-  init(String rivalUserId,String category)async{
+  init(String category)async{
     setInitialised(false);
     // countDownController = CountDownController();
     while(question==null){
