@@ -5,6 +5,8 @@ extension NetworkExtension on Network {
     switch(this) {
       case Network.LOGIN:
         return '/auth/login';
+        case Network.CAMPAIGNS:
+        return '/campaigns';
       default:
         return '';
     }

@@ -31,15 +31,11 @@ class Campaign extends BaseModel{
   DateTime? campaignStartDate;
   DateTime? campaignEndDate;
 
-  @override
-  fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
-  }
+  factory Campaign.fromJson(Map<String, dynamic> json) => _$CampaignFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
-  }
+  fromJson(Map<String, dynamic> json) => _$CampaignFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$CampaignToJson(this);
 }

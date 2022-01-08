@@ -1,4 +1,7 @@
+import 'package:kazandirio/core/constant/enum/network_enum.dart';
 import 'package:kazandirio/core/init/network/network_manager.dart';
+import 'package:kazandirio/model/campaign.dart';
+import 'package:kazandirio/core/extension/network_extension.dart';
 
 class CampaignService {
   static CampaignService? _instance;
@@ -12,5 +15,6 @@ class CampaignService {
 
   final NetworkManager? _networkManager = NetworkManager.instance;
 
-
+  Future<List<Campaign>?> getCampaigns() async =>
+      await _networkManager!.get(Network.CAMPAIGNS.value, Campaign());
 }
