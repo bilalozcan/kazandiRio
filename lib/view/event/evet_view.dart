@@ -131,7 +131,7 @@ class EventView extends StatelessWidget {
                   borderRadius: 10,
                   text: 'Giriş',
                   selectedTextColor: Colors.black,
-                  selectedBackgroundColor: Colors.green,
+                  selectedBackgroundColor: Colors.white,
                   transitionType: TransitionType.LEFT_TO_RIGHT,
                   backgroundColor: Colors.white,
                   isSelected: true,
@@ -140,7 +140,7 @@ class EventView extends StatelessWidget {
                       letterSpacing: 3,
                       color: Colors.black,
                       fontWeight: FontWeight.bold), onPress: () {
-                    context.navigateTo(LiveView());
+                    context.navigateTo(LiveView(eventId: data['id'],));
                 },
                 ),
               )

@@ -44,9 +44,12 @@ dependencies:
   firebase_core: ^1.11.0
   flutter_countdown_timer: ^4.1.0
   flutter_animated_button: ^2.0.0
+  dropdown_search: ^2.0.1
   date_format: ^2.0.5
   flutter_html: ^2.2.1
   social_login_buttons: ^1.0.6
+  bubble: ^1.2.1
+  hexcolor: ^2.0.5
 
 
 
