@@ -14,12 +14,18 @@ class LoginViewModel extends CustomBaseViewModel {
 
   void login() async {
     isLoading = true;
-    // var result = await AuthService.instance!.login(phoneController.text);
-    // if (result != null && result.isValid!) {
-    //   context.navigateTo(VerificationView());
-    // } else {
-    //   Fluttertoast.showToast(msg: 'Giriş Hatalı');
-    // }
-    // isLoading = false;
+    if (phoneController.text.isNotEmpty) {
+      var result = await AuthService.instance!.login(phoneController.text);
+      if (result != null && result.isValid!) {
+        context.navigateToReplacement(
+            VerificationView(phoneNumber: phoneController.text));
+      } else {
+        Fluttertoast.showToast(msg: 'Giriş Hatalı');
+      }
+    } else {
+      Fluttertoast.showToast(msg: 'Lütfen telefon numarası giriniz');
+    }
+
+    isLoading = false;
   }
 }

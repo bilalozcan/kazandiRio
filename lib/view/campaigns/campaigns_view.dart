@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazandirio/core/base/base_data.dart';
 import 'package:kazandirio/model/campaign.dart';
 import 'package:kazandirio/view/authenticate/register/register_view.dart';
 import 'package:kazandirio/view/campaign_detail/campaign_detail_view.dart';
@@ -30,20 +31,25 @@ class CampaignsView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText('Merhaba,'),
-                  CustomText('KazandıRio\'lu', fontWeight: FontWeight.w500)
+                  CustomText(
+                      '${BaseData.instance!.user != null ? BaseData.instance!.user!.fullName : 'KazandıRio\'lu'}',
+                      fontWeight: FontWeight.w500)
                 ],
               ),
               actions: [
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: CustomButton(
-                    onPressed: () => context.navigateTo(RegisterView()),
+                    onPressed: () => viewModel,
                     backgroundColor: Color(0xff2751B8),
-                    width: context.dynamicWidth(0.23),
+                    width: BaseData.instance!.user != null
+                        ? context.dynamicWidth(0.15)
+                        : context.dynamicWidth(0.23),
                     child: Row(
                       children: [
                         Icon(Icons.person),
-                        CustomText('Giriş', color: Colors.white)
+                        if (BaseData.instance!.user == null)
+                          CustomText('Giriş', color: Colors.white)
                       ],
                     ),
                   ),

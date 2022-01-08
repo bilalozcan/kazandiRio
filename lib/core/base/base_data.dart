@@ -1,5 +1,7 @@
 
 
+import 'package:kazandirio/model/user.dart';
+
 class BaseData {
   static BaseData? _instance;
 
@@ -10,6 +12,7 @@ class BaseData {
 
   BaseData._init();
 
+  User? user;
 
 
 }

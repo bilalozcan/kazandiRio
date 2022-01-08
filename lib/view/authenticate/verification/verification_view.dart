@@ -8,7 +8,10 @@ import 'package:stacked/stacked.dart';
 import 'verification_view_model.dart';
 
 class VerificationView extends StatelessWidget {
-  const VerificationView({Key? key}) : super(key: key);
+  final String phoneNumber;
+
+  const VerificationView({Key? key, required this.phoneNumber})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +60,12 @@ class VerificationView extends StatelessWidget {
                       ],
                     ),
                     CustomTextFormField(
-                      TextEditingController(),
+                      viewModel.validationCode,
                       hintText: 'Doğrulama Kodu',
                       textInputType: TextInputType.phone,
                     ),
                     CustomButton(
-                      onPressed: () {},
+                      onPressed: () => viewModel.verification(phoneNumber),
                       text: 'Numarayı Doğrula',
                       height: context.dhExceptStatusBar(0.08),
                       textColor: Colors.white,

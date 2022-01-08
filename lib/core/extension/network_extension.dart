@@ -7,6 +7,8 @@ extension NetworkExtension on Network {
         return '/auth/login';
       case Network.VALIDATE:
         return '/auth/login/validate';
+      case Network.PROFILE:
+        return '/auth/profile';
       case Network.CAMPAIGNS:
         return '/campaigns';
       default:
