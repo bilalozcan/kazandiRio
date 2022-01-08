@@ -46,6 +46,7 @@ class WalletView extends StatelessWidget {
                     onPressed: () {},
                     text: 'Haydi, Giriş yap & Üye Ol',
                     textColor: Colors.white,
+                    backgroundColor: Color(0xff2751B8),
                   )
                 ],
               ),
