@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:kazandirio/core/base/base_data.dart';
 import 'package:kazandirio/firebase_services/firestore_services.dart';
+import 'package:kazandirio/model/user.dart';
 import 'package:stacked/stacked.dart';
 class Code{
   String? code;
@@ -13,25 +15,25 @@ class Code{
 }
 class LiveViewModel extends BaseViewModel{
   FirestoreServiceApp firestoreService = FirestoreServiceApp.instance!;
+  BaseData baseData = BaseData.instance!;
   ScrollController scrollController = ScrollController();
-  final String userId ='1';
+  late User user;
    String eventId='';
-
-
   init( String eventID){
     setInitialised(false);
+    user = baseData.user!;
     eventId = eventID;
     setInitialised(true);
   }
 
   userEventAddFunc()async {
-    await firestoreService.addEventUser(eventId, userId);
+    await firestoreService.addEventUser(eventId, user.id!);
   }
   userEventDeleteFunc()async {
-    await firestoreService.deleteEventUser(eventId, userId);
+    await firestoreService.deleteEventUser(eventId, user.id!);
   }
   getUserCode()async{
-   return  await firestoreService.getUserCode(userId).then((value) {
+   return  await firestoreService.getUserCode(user.id!).then((value) {
      var codeList=<Code>[];
      if(value.docs.isNotEmpty){
        for(var i in value.docs){
@@ -47,7 +49,7 @@ class LiveViewModel extends BaseViewModel{
   }
 
   addMeesage(var map,String codeId)async {
-    await firestoreService.addMessage(map, eventId,codeId,userId);
+    await firestoreService.addMessage(map, eventId,codeId,user.id!);
     notifyListeners();
   }
 }

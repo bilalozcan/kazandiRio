@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:kazandirio/core/extension/context_extension.dart';
+import 'package:kazandirio/view/authenticate/register/register_view.dart';
 import 'package:kazandirio/view/event/event_view_model.dart';
 import 'package:kazandirio/view/live/live_view.dart';
 import 'package:stacked/stacked.dart';
@@ -20,7 +22,13 @@ class EventView extends StatelessWidget {
         builder: (context, viewModel, child) {
           return Scaffold(
               appBar: AppBar(
-                title: Text('Etkinlikler'),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarColor: Colors.white
+                ),
+                title: Text('Etkinlikler',style: TextStyle(
+                    color: Colors.black
+                ),),
+                backgroundColor: Colors.white,
               ),
               body: StreamBuilder(
                 stream: viewModel.firestoreService.getEventsStream(),
@@ -33,14 +41,14 @@ class EventView extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       itemCount: data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return eventWidget(context, data.elementAt(index).data());
+                        return eventWidget(context, data.elementAt(index).data(),viewModel);
                       });
                 },
               ));
         });
   }
 
-  eventWidget(BuildContext context, Map<String, dynamic> data) {
+  eventWidget(BuildContext context, Map<String, dynamic> data,EventViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -134,13 +142,17 @@ class EventView extends StatelessWidget {
                   selectedBackgroundColor: Colors.white,
                   transitionType: TransitionType.LEFT_TO_RIGHT,
                   backgroundColor: Colors.white,
-                  isSelected: true,
+                  isSelected: false,
                   textStyle: TextStyle(
                       fontSize: 15,
                       letterSpacing: 3,
                       color: Colors.black,
                       fontWeight: FontWeight.bold), onPress: () {
+                    if(viewModel.baseData.user!=null)
                     context.navigateTo(LiveView(eventId: data['id'],));
+                    else{
+                      context.navigateTo(RegisterView());
+                    }
                 },
                 ),
               )

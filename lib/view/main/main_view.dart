@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kazandirio/view/campaigns/campaigns_view.dart';
+import 'package:kazandirio/view/event/evet_view.dart';
 import 'package:kazandirio/view/wallet/wallet_view.dart';
 import 'package:stacked/stacked.dart';
 
@@ -19,8 +20,14 @@ class MainView extends StatelessWidget {
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: viewModel.bottomBarIndex,
               selectedItemColor: Color(0xff2751B8),
+              unselectedItemColor: Colors.black,
+              type: BottomNavigationBarType.fixed,
               onTap: (value) => viewModel.bottomBarIndex = value,
               items: [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.event),
+                    activeIcon: Icon(Icons.event_available),
+                    label: 'Etkinlikler'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.home_outlined),
                     activeIcon: Icon(Icons.home_filled),
@@ -40,10 +47,12 @@ class MainView extends StatelessWidget {
   Widget body(int index) {
     switch(index) {
       case 0:
-        return CampaignsView();
+        return EventView();
       case 1:
-        return Center(child: Text('QR'));
+        return CampaignsView();
       case 2:
+        return Center(child: Text('QR'));
+      case 3:
         return WalletView();
       default:
         return SizedBox();

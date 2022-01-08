@@ -25,164 +25,192 @@ class LiveView extends StatelessWidget {
             child: SafeArea(
               child: Scaffold(
                   backgroundColor: Color(0xff0C2D83),
-                  body: Column(
+                  body: Stack(
                     children: [
-                      StreamBuilder(
-                        stream: viewModel.firestoreService.getLivesUserStream(eventId),
-                        builder: (context, dynamic sn) {
-                          var data = [];
-                          if (sn.hasData) {
-                            data = sn.data.docs;
-                            viewModel.scrollController.jumpTo(0);
-                          }
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 8,top: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
+                      Center(child: Image.asset('assets/icon.png',)),
+                      Column(
+                        children: [
+                          Expanded(
+                            child: StreamBuilder(
+                              stream: viewModel.firestoreService.getLivesStream(eventId),
+                              builder: (context, dynamic sn) {
+                                var data = [];
+                                if (sn.hasData) {
+                                  data = sn.data.docs;
+                                  viewModel.scrollController.jumpTo(0);
+                                }
+                                return ListView.builder(
+                                  controller: viewModel.scrollController,
+                                    padding: const EdgeInsets.only(bottom: 20,left: 10,right: 10),
+                                    itemCount: data.length,
+                                    reverse: true,
+                                    physics: BouncingScrollPhysics(),
+                                    itemBuilder: (BuildContext context, int index) {
+                                      if(data.elementAt(index)['senderId']=='1'){
+                                        return myGetCodeWidget(data.elementAt(index), context);
+                                      }
+                                      else{
+                                        return getCodeWidget(data.elementAt(index), context);
+                                      }
+                                    });
+                              },
+                            ),
+                          ),
+                         FutureBuilder(
+                             future:viewModel.getUserCode() ,
+                             builder: (context,dynamic snCode){
+                           var codeList = <Code>[];
+                           if(snCode.data!=null)
+                             codeList = snCode.data;
+
+                           return codeList.isNotEmpty? DropdownSearch<Code>(
+                             dropdownSearchBaseStyle: TextStyle(color: Colors.white),
+                             dropDownButton: Container(),
+                             dropdownButtonBuilder: (context) {
+                               return Material(
+                                 color: Colors.white,
+                                 child: Container(
+                                   color: Colors.white,
+                                   height: 45,
+                                 ),
+                               );
+                             },
+                             dropdownBuilder: (context, Code? code) {
+                               return Container(
+                                 child: Row(
+                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                   children: [
+                                     Text(
+                                      code!=null?code.code.toString(): 'Kod Giriniz',
+                                       style: TextStyle(
+                                         fontSize: 17,
+                                         fontWeight: FontWeight.bold,
+                                         letterSpacing: 1.1,
+                                         color: Colors.white,
+                                       ),
+                                     ),
+                                     GestureDetector(
+                                       onTap: () {
+                                         if(code!=null&&code.id!=''){
+                                           Map<String, dynamic> map = {
+                                             'code':code.code,
+                                             'date':DateTime.now(),
+                                             'point':5,
+                                             'userColor':'98D930',
+                                             'senderId':'1',
+                                             'userPhoto':'https://i.imgur.com/BoN9kdC.png',
+                                             'username':'mehmet'
+                                           };
+                                          viewModel.addMeesage(map, code.id!);
+                                         }
+                                       },
+                                       child: Padding(
+                                         padding: const EdgeInsets.only(right: 8),
+                                         child: Icon(
+                                           Icons.send,
+                                           size: 30,
+                                           color: Colors.white,
+                                         ),
+                                       ),
+                                     ),
+                                   ],
+                                 ),
+                               );
+                             },
+                             popupItemBuilder: (context,code,bool){
+                               return Padding(
+                                 padding: const EdgeInsets.all(8.0),
+                                 child: Container(
+                                   height: 50,
+                                   decoration: BoxDecoration(
+                                     color: HexColor('507CC0'),
+                                     borderRadius: BorderRadius.all(Radius.circular(10))
+                                   ),
+
+                                   padding: EdgeInsets.only(left: 20),
+                                   alignment: Alignment.centerLeft,
+                                   child: Text('-> '+code.code!,style: TextStyle(
+                                     color: Colors.white,
+                                     fontWeight: FontWeight.w700,
+                                     fontSize: 18,
+                                     letterSpacing: 2
+                                   ),),
+                                 ),
+                               );
+                             },
+                             popupShape:RoundedRectangleBorder(
+                               borderRadius: BorderRadius.only(
+                                 topRight: Radius.circular(20.0),
+                                 topLeft: Radius.circular(20.0)
+                               ),
+                             ),
+                             mode: Mode.BOTTOM_SHEET,
+                             items: codeList,
+                             hint: "Kod seçiniz",
+                             onChanged: print,
+                           ):Container();
+                         })
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: ()async{
+                              viewModel.userEventDeleteFunc();
+                              context.pop();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child:  Container(
                                   height: 30,
                                   width: 30,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    color: HexColor('#CE442C'),
-                                    shape: BoxShape.circle
+                                      color: Colors.white,
+                                      shape: BoxShape.circle
                                   ),
-                                  child: Text(
-                                      '${data.length}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Colors.white
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                  child: Icon(Icons.close,color: Colors.black,)
+                              ),
                             ),
-                          );
-                        },
+                          ),
+                          StreamBuilder(
+                            stream: viewModel.firestoreService.getLivesUserStream(eventId),
+                            builder: (context, dynamic sn) {
+                              var data = [];
+                              if (sn.hasData) {
+                                data = sn.data.docs;
+                                viewModel.scrollController.jumpTo(0);
+                              }
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 8,top: 8),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      height: 30,
+                                      width: 30,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          color: HexColor('#CE442C'),
+                                          shape: BoxShape.circle
+                                      ),
+                                      child: Text(
+                                        '${data.length}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-
-                      Expanded(
-                        child: StreamBuilder(
-                          stream: viewModel.firestoreService.getLivesStream(eventId),
-                          builder: (context, dynamic sn) {
-                            var data = [];
-                            if (sn.hasData) {
-                              data = sn.data.docs;
-                              viewModel.scrollController.jumpTo(0);
-                            }
-                            return ListView.builder(
-                              controller: viewModel.scrollController,
-                                padding: const EdgeInsets.only(bottom: 20,left: 10,right: 10),
-                                itemCount: data.length,
-                                reverse: true,
-                                physics: BouncingScrollPhysics(),
-                                itemBuilder: (BuildContext context, int index) {
-                                  if(data.elementAt(index)['senderId']=='1'){
-                                    return myGetCodeWidget(data.elementAt(index), context);
-                                  }
-                                  else{
-                                    return getCodeWidget(data.elementAt(index), context);
-                                  }
-                                });
-                          },
-                        ),
-                      ),
-                     FutureBuilder(
-                         future:viewModel.getUserCode() ,
-                         builder: (context,dynamic snCode){
-                       var codeList = <Code>[];
-                       if(snCode.data!=null)
-                         codeList = snCode.data;
-
-                       return codeList.isNotEmpty? DropdownSearch<Code>(
-                         dropdownSearchBaseStyle: TextStyle(color: Colors.white),
-                         dropDownButton: Container(),
-                         dropdownButtonBuilder: (context) {
-                           return Material(
-                             color: Colors.white,
-                             child: Container(
-                               color: Colors.white,
-                               height: 45,
-                             ),
-                           );
-                         },
-                         dropdownBuilder: (context, Code? code) {
-                           return Container(
-                             child: Row(
-                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                               children: [
-                                 Text(
-                                  code!=null?code.code.toString(): 'Kod Giriniz',
-                                   style: TextStyle(
-                                     fontSize: 17,
-                                     fontWeight: FontWeight.bold,
-                                     letterSpacing: 1.1,
-                                     color: Colors.white,
-                                   ),
-                                 ),
-                                 GestureDetector(
-                                   onTap: () {
-                                     if(code!=null&&code.id!=''){
-                                       Map<String, dynamic> map = {
-                                         'code':code.code,
-                                         'date':DateTime.now(),
-                                         'point':5,
-                                         'userColor':'98D930',
-                                         'senderId':'1',
-                                         'userPhoto':'https://i.imgur.com/BoN9kdC.png',
-                                         'username':'mehmet'
-                                       };
-                                      viewModel.addMeesage(map, code.id!);
-                                     }
-                                   },
-                                   child: Padding(
-                                     padding: const EdgeInsets.only(right: 8),
-                                     child: Icon(
-                                       Icons.send,
-                                       size: 30,
-                                       color: Colors.white,
-                                     ),
-                                   ),
-                                 ),
-                               ],
-                             ),
-                           );
-                         },
-                         popupItemBuilder: (context,code,bool){
-                           return Padding(
-                             padding: const EdgeInsets.all(8.0),
-                             child: Container(
-                               height: 50,
-                               decoration: BoxDecoration(
-                                 color: HexColor('507CC0'),
-                                 borderRadius: BorderRadius.all(Radius.circular(10))
-                               ),
-
-                               padding: EdgeInsets.only(left: 20),
-                               alignment: Alignment.centerLeft,
-                               child: Text('-> '+code.code!,style: TextStyle(
-                                 color: Colors.white,
-                                 fontWeight: FontWeight.w700,
-                                 fontSize: 18,
-                                 letterSpacing: 2
-                               ),),
-                             ),
-                           );
-                         },
-                         popupShape:RoundedRectangleBorder(
-                           borderRadius: BorderRadius.only(
-                             topRight: Radius.circular(20.0),
-                             topLeft: Radius.circular(20.0)
-                           ),
-                         ),
-                         mode: Mode.BOTTOM_SHEET,
-                         items: codeList,
-                         hint: "Kod seçiniz",
-                         onChanged: print,
-                       ):Container();
-                     })
                     ],
                   )),
             ),
