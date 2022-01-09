@@ -44,6 +44,5 @@ class GameNewViewModel extends BaseViewModel{
     // countDownController.start();
     setInitialised(true);
     notifyListeners();
-
   }
 }
