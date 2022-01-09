@@ -7,9 +7,9 @@ import 'package:kazandirio/view/game_new/game_new_view.dart';
 import 'package:stacked/stacked.dart';
 
 class GameView extends StatelessWidget {
-  const GameView({Key? key,required this.evetId}) : super(key: key);
-
+  const GameView({Key? key,required this.evetId,required this.codePoint}) : super(key: key);
   final String evetId;
+  final int codePoint;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class GameView extends StatelessWidget {
     String name2 = 'Mehmet';
     return ViewModelBuilder<GameViewModel>.reactive(
         viewModelBuilder: () => GameViewModel(),
-        onModelReady: (model)=>model.init(evetId,context),
+        onModelReady: (model)=>model.init(evetId,context,codePoint),
         builder: (context, viewModel, child) {
           // viewModel.init(evetId,context);
           return SafeArea(
@@ -53,7 +53,7 @@ class GameView extends StatelessWidget {
                           user1 = data['users'].elementAt(0)['name']??'';
                           if(data['users'].length>1)
                           user2 = data['users'].elementAt(1)['name']??'';
-                          if(user1!=''&&user2!=''&&viewModel.roomId!=null){
+                          if(user1!=''&&user2!=''&&viewModel.roomId!=null&&data['status']=='search'){
                               Future.delayed(Duration(seconds: 3)).then((value) async{
                                 viewModel.firestoreService.firestore.collection('gameRoom').doc(viewModel.roomId!).update({
                                   'status':'GAME'

@@ -70,12 +70,12 @@ class LiveViewModel extends BaseViewModel{
     var rng = new Random();
     try{
       await Future.delayed(Duration(seconds: 2)).then((value)async{
-        await context.navigateTo(GameView(evetId: eventId,));
+        await context.navigateTo(GameView(evetId: eventId,codePoint: map['point'],));
       });
       notifyListeners();
     }
     catch(e){
-      await context.navigateTo(GameView(evetId: eventId,));
+      await context.navigateTo(GameView(evetId: eventId,codePoint: map['point'],));
     }
 
   }

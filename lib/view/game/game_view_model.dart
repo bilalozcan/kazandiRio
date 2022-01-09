@@ -33,7 +33,7 @@ class GameViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  init(String docId, BuildContext context) async {
+  init(String docId, BuildContext context,int codePoint) async {
     setInitialised(false);
     var res = await firestoreService.getGameRooms().then((value) {
       if (value.docs.isNotEmpty) {
@@ -47,6 +47,7 @@ class GameViewModel extends BaseViewModel {
               'users': FieldValue.arrayUnion([
                 {'id': baseData.user!.id!, 'name': baseData.user!.fullName}
               ]),
+              'point':FieldValue.increment(codePoint),
             });
             break;
           }
@@ -56,6 +57,7 @@ class GameViewModel extends BaseViewModel {
           firestoreService.firestore.collection('gameRoom').doc(id).set({
             'id': id,
             'status': 'search',
+            'point':codePoint,
             'users': FieldValue.arrayUnion([
               {'id': baseData.user!.id!, 'name': baseData.user!.fullName}
             ]),
@@ -67,6 +69,7 @@ class GameViewModel extends BaseViewModel {
         firestoreService.firestore.collection('gameRoom').doc(id).set({
           'id': id,
           'status': 'search',
+          'point':codePoint,
           'users': FieldValue.arrayUnion([
             {'id': baseData.user!.id!, 'name': baseData.user!.fullName}
           ]),

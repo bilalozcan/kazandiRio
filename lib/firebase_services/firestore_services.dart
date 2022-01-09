@@ -37,7 +37,7 @@ class FirestoreServiceApp {
   addMessage(Map<String,dynamic> map, String eventId,String codeId,String userId)async{
     firestore.collection('eventLive').doc(eventId).collection('live').add(map);
     await firestore.collection('usersCode').doc(userId).collection('codes').doc(codeId).update({
-      'status':true,
+      'status':false,
     });
   }
   addEventUser( String eventId,String userId)async{

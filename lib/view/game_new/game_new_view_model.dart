@@ -1,10 +1,12 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:kazandirio/core/base/base_data.dart';
 import 'package:kazandirio/firebase_services/firestore_services.dart';
 import 'package:stacked/stacked.dart';
 
 class GameNewViewModel extends BaseViewModel{
   FirestoreServiceApp firestoreService = FirestoreServiceApp.instance!;
-  late CountDownController countDownController;
+   CountDownController? countDownController;
+  BaseData baseData = BaseData.instance!;
   bool _isSelected = false;
   int _selectedIndex = -1;
 
@@ -26,7 +28,7 @@ class GameNewViewModel extends BaseViewModel{
 
   init(String category)async{
     setInitialised(false);
-    // countDownController = CountDownController();
+    countDownController = CountDownController();
     while(question==null){
       question =await firestoreService.getQuestion(category).then((value) {
         if(value.docs.isNotEmpty){
