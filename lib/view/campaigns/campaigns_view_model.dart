@@ -5,6 +5,7 @@ import 'package:kazandirio/core/extension/context_extension.dart';
 import 'package:kazandirio/model/campaign.dart';
 import 'package:kazandirio/service/campaign_service.dart';
 import 'package:kazandirio/view/authenticate/register/register_view.dart';
+import 'package:kazandirio/view/profile/profile_view.dart';
 
 class CampaignsViewModel extends CustomBaseViewModel {
   List<Campaign>? campaigns;
@@ -28,6 +29,7 @@ class CampaignsViewModel extends CustomBaseViewModel {
 
   void userButton() {
     if (BaseData.instance!.user != null) {
+      context.navigateTo(ProfileView());
     } else {
       context.navigateTo(RegisterView());
     }

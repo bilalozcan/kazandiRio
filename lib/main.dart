@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kazandirio/core/init/cache/locale_manager.dart';
 import 'package:kazandirio/view/splash/splash_view.dart';
-import 'package:kazandirio/view/event/evet_view.dart';
+import 'package:kazandirio/view/event/event_view.dart';
 import 'package:provider/provider.dart';
 import 'core/init/provider/provider_list.dart';
 

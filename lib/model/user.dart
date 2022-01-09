@@ -27,7 +27,7 @@ class User extends BaseModel {
   dynamic birthDate;
   DateTime? createdOn;
 
-  String get fullName => 'Test User';
+  String get fullName => '${firstName ?? 'Test'} ${lastName ?? 'User'}';
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
