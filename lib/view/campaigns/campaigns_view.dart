@@ -38,7 +38,7 @@ class CampaignsView extends StatelessWidget {
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(14.0),
                   child: CustomButton(
                     onPressed: () => viewModel.userButton(),
                     backgroundColor: Color(0xff2751B8),
@@ -46,6 +46,7 @@ class CampaignsView extends StatelessWidget {
                         ? context.dynamicWidth(0.15)
                         : context.dynamicWidth(0.24),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Icon(Icons.person),
                         if (BaseData.instance!.user == null)
