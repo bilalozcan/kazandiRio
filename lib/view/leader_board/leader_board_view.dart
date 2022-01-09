@@ -15,104 +15,156 @@ class LeaderBoardView extends StatelessWidget {
         onModelReady: (model) => model.initialize(context),
         builder: (context, viewModel, child) {
           return SafeArea(
-            child: viewModel.initialised?Scaffold(
-              backgroundColor: Color(0xff0C2D83),
-              body: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: RefreshIndicator(
-                  onRefresh: ()async{
-                     viewModel.initialize(context);
-                  },
-                  child: SingleChildScrollView(
-                    child: Column(
+            child: viewModel.initialised
+                ? Scaffold(
+                    backgroundColor: Color(0xff0C2D83),
+                    body: Stack(
                       children: [
-                        Container(
-                          height: context.dynamicHeight(0.4),
-                          width: context.dynamicWidth(1),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Stack(
-                                overflow: Overflow.visible,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 15),
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              viewModel.initialize(context);
+                            },
+                            child: SingleChildScrollView(
+                              child: Column(
                                 children: [
-                                  theFirstTree(
-                                    context,
-                                    '2',
-                                    'assets/icon.png',
-                                    context.dynamicHeight(0.12),
-                                    viewModel.leaderTableList[1]['name']??'',
-                                    //snapshot.data[0]['fullname'],
-                                    viewModel.leaderTableList[1]['point'].toString(),
-                                    // snapshot.data.length < 2 ? '-' : snapshot.data[1]['point'].toString(),
+                                  Container(
+                                    height: context.dynamicHeight(0.4),
+                                    width: context.dynamicWidth(1),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Stack(
+                                          overflow: Overflow.visible,
+                                          children: [
+                                            theFirstTree(
+                                              context,
+                                              '2',
+                                              'assets/icon.png',
+                                              context.dynamicHeight(0.12),
+                                              viewModel.leaderTableList[1]
+                                                      ['name'] ??
+                                                  '',
+                                              //snapshot.data[0]['fullname'],
+                                              viewModel.leaderTableList[1]
+                                                      ['point']
+                                                  .toString(),
+                                              // snapshot.data.length < 2 ? '-' : snapshot.data[1]['point'].toString(),
 
-                                    FontAwesomeIcons.chevronUp,
-                                    -context.dynamicHeight(0.24),
-                                    -context.dynamicHeight(0.01),
-                                    context.dynamicHeight(0.045),
-                                  ),
-                                  theFirstTree(
-                                    context,
-                                    '3',
-                                    'assets/icon.png',
-                                    context.dynamicHeight(0.12),
-                                    viewModel.leaderTableList.length>2?viewModel.leaderTableList[2]['name']:'',
-                                    //snapshot.data[0]['fullname'],
-                                      viewModel.leaderTableList.length>2?viewModel.leaderTableList[2]['point'].toString():'',
-                                    //snapshot.data.length < 3 ? '-' : snapshot.data[2]['point'].toString(),
+                                              FontAwesomeIcons.chevronUp,
+                                              -context.dynamicHeight(0.24),
+                                              -context.dynamicHeight(0.01),
+                                              context.dynamicHeight(0.045),
+                                            ),
+                                            theFirstTree(
+                                              context,
+                                              '3',
+                                              'assets/icon.png',
+                                              context.dynamicHeight(0.12),
+                                              viewModel.leaderTableList.length >
+                                                      2
+                                                  ? viewModel.leaderTableList[2]
+                                                      ['name']
+                                                  : '',
+                                              //snapshot.data[0]['fullname'],
+                                              viewModel.leaderTableList.length >
+                                                      2
+                                                  ? viewModel.leaderTableList[2]
+                                                          ['point']
+                                                      .toString()
+                                                  : '',
+                                              //snapshot.data.length < 3 ? '-' : snapshot.data[2]['point'].toString(),
 
-                                    FontAwesomeIcons.chevronDown,
-                                    -context.dynamicHeight(0.01),
-                                    -context.dynamicHeight(0.24),
-                                    context.dynamicHeight(0.045),
-                                  ),
-                                  theFirstTree(
-                                    context,
-                                    '1',
-                                    'assets/icon.png',
-                                    context.dynamicHeight(0.16),
+                                              FontAwesomeIcons.chevronDown,
+                                              -context.dynamicHeight(0.01),
+                                              -context.dynamicHeight(0.24),
+                                              context.dynamicHeight(0.045),
+                                            ),
+                                            theFirstTree(
+                                              context,
+                                              '1',
+                                              'assets/icon.png',
+                                              context.dynamicHeight(0.16),
 
-                                    viewModel.leaderTableList.first['name'],
-                                    //snapshot.data[0]['fullname'],
-                                    viewModel.leaderTableList.first['point'].toString(),
-                                    //snapshot.data[0]['point'].toString(),
-                                    FontAwesomeIcons.crown,
-                                    -context.dynamicHeight(0.2),
-                                    -context.dynamicHeight(0.2),
-                                    -context.dynamicHeight(0.016),
-                                  ),
-                                  Positioned(
-                                    child: Column(
-                                      children: [],
+                                              viewModel.leaderTableList
+                                                  .first['name'],
+                                              //snapshot.data[0]['fullname'],
+                                              viewModel.leaderTableList
+                                                  .first['point']
+                                                  .toString(),
+                                              //snapshot.data[0]['point'].toString(),
+                                              FontAwesomeIcons.crown,
+                                              -context.dynamicHeight(0.2),
+                                              -context.dynamicHeight(0.2),
+                                              -context.dynamicHeight(0.016),
+                                            ),
+                                            Positioned(
+                                              child: Column(
+                                                children: [],
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
                                     ),
                                   ),
+                                  ListView.builder(
+                                    itemCount:
+                                        viewModel.leaderTableList.length <= 3
+                                            ? 0
+                                            : viewModel.leaderTableList.length -
+                                                3,
+                                    // snapshot.data.length <= 3
+                                    //     ? 0
+                                    //     : snapshot.data.length > 50
+                                    //     ? 47
+                                    //     : snapshot.data.length - 3,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return listViewContainer(
+                                          context,
+                                          index,
+                                          viewModel.leaderTableList[index + 3][
+                                              'name'] /*snapshot.data[index + 3]['fullname']*/,
+                                          viewModel.leaderTableList[index + 3]
+                                                  ['point']
+                                              .toString() /*snapshot.data[index + 3]['fullname']*/
+                                          );
+                                    },
+                                  ),
                                 ],
-                              )
-                            ],
+                              ),
+                            ),
                           ),
                         ),
-                        ListView.builder(
-                          itemCount: viewModel.leaderTableList.length<=3?0:viewModel.leaderTableList.length-3,
-                          // snapshot.data.length <= 3
-                          //     ? 0
-                          //     : snapshot.data.length > 50
-                          //     ? 47
-                          //     : snapshot.data.length - 3,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return listViewContainer(
-                                context,
-                                index,
-                                viewModel.leaderTableList[index+3]['name'] /*snapshot.data[index + 3]['fullname']*/,
-                                viewModel.leaderTableList[index+3]['point'].toString() /*snapshot.data[index + 3]['fullname']*/
-                            );},
-                        ),
+                        Positioned(
+                          top: 15,
+                          left: 15,
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xff2751B8),
+                            child: Center(
+                              child: IconButton(
+                                onPressed: () => context.pop(),
+                                iconSize: 16,
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
+                  )
+                : Scaffold(
+                    backgroundColor: Color(0xff0C2D83),
                   ),
-                ),
-              ),
-            ):Scaffold( backgroundColor: Color(0xff0C2D83),),
           );
         });
   }
@@ -120,10 +172,9 @@ class LeaderBoardView extends StatelessWidget {
   Widget theFirstTree(
       BuildContext context, number, imageUrl, size, username, point, icon,
       [positionLeft, positionRight, positionTop]) {
-
     return Positioned(
       left: positionLeft,
-      top: positionTop,
+      top: positionTop + 15,
       right: positionRight,
       child: Column(
         children: [
@@ -144,7 +195,7 @@ class LeaderBoardView extends StatelessWidget {
           SizedBox(
             height: context.dynamicHeight(0.01),
           ),
-          nameAndPoint(username??'', point??'', context)
+          nameAndPoint(username ?? '', point ?? '', context)
         ],
       ),
     );
