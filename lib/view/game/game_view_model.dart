@@ -21,12 +21,50 @@ class GameViewModel extends BaseViewModel {
     _rivalUser = value;
     notifyListeners();
   }
-  Stream streamRoomControl() async*{
-    yield firestoreService.getGameRooms();
+
+  String? _roomId;
+
+  String? get roomId => _roomId;
+
+  set roomId(String? value) {
+    _roomId = value;
+    notifyListeners();
   }
 
   init(String docId, BuildContext context) {
     setInitialised(true);
+    var res = firestoreService.getGameRooms().then((value) {
+      if (value.docs.isNotEmpty) {
+        value.docs.forEach((element) {
+          var data = element.data();
+          bool control = false;
+          if (data['users'].length < 2) {
+            control = true;
+            roomId = data['id'];
+            firestoreService.firestore.collection('gameRoom').doc(data['id']).update({
+              'users': FieldValue.arrayUnion([baseData.user!.id!]),
+            });
+          }
+          if (!control) {
+            var id = generateRandomString(20);
+            firestoreService.firestore.collection('gameRoom').doc(id).set({
+              'id': id,
+              'status': 'search',
+              'users': FieldValue.arrayUnion([baseData.user!.id!]),
+            });
+            roomId = id;
+          }
+        });
+      } else {
+        var id = generateRandomString(20);
+        firestoreService.firestore.collection('gameRoom').doc(id).set({
+          'id': id,
+          'status': 'search',
+          'users': FieldValue.arrayUnion([baseData.user!.id!]),
+        });
+        roomId = id;
+      }
+    });
     // StreamController streamController= StreamController();
     // var streamRoom =  streamRoomControl();
     // streamRoom.pipe(streamController);

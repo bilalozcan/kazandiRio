@@ -64,6 +64,7 @@ class EventView extends StatelessWidget {
                       image: NetworkImage(data['photo']), // insert image path here
                       fit: BoxFit.fill,
                     ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                     shape: BoxShape.rectangle),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)), //divide width of Container by 2 to make it rounded
@@ -71,7 +72,7 @@ class EventView extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
-                        Color(0xff0C2D83).withOpacity(0.7),
+                        Color(0xff0C2D83).withOpacity(0.3),
                         Colors.transparent,
                       ]), //change this color according to need.
                     ),
@@ -120,7 +121,7 @@ class EventView extends StatelessWidget {
                                 return Text('Etkinlik Başladı');
                               }
                               return Text(
-                                '${time.days} Gün ${time.hours}:${time.min}:${time.sec}',
+                                '${time.days??'0'} Gün ${time.hours!<10?'0${time.hours}':time.hours}:${time.min!<10?'0${time.min}':time.min}:${time.sec!<10?'0${time.sec}':time.sec}',
                                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
                               );
                             },
