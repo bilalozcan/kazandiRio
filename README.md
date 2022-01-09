@@ -16,7 +16,7 @@ Yenilenebilir kod ile hem eğlenip hem kazanma fırsatı elde etmiş oluyorlar.
 
 ## Android APK
 
-[![Foo](/screenshot/apkicon.png)](https://drive.google.com/file/d/1UWC6wghJ1uj-WjxRvmWLn5Jg-4BSV4M3/view?usp=sharing)
+[![Foo](/screenshot/android.png)](https://drive.google.com/file/d/1UWC6wghJ1uj-WjxRvmWLn5Jg-4BSV4M3/view?usp=sharing)
 
 ## Uygulama Ekran Görüntüleri
 
