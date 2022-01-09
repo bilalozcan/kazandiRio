@@ -25,8 +25,6 @@ class EventView extends StatelessWidget {
         builder: (context, viewModel, child) {
           return Scaffold(
               appBar: AppBar(
-                systemOverlayStyle:
-                    SystemUiOverlayStyle(statusBarColor: Colors.white),
                 title: Text(
                   'Etkinlikler',
                   style: TextStyle(color: Colors.black),
@@ -37,7 +35,21 @@ class EventView extends StatelessWidget {
                 toolbarHeight: 70,
                 actions: [
                   Padding(
-                    padding: const EdgeInsets.all(14.0),
+                    padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 4),
+                    child: CustomButton(
+                      onPressed: () => viewModel.leaderBoardButton(),
+                      backgroundColor: Color(0xff2751B8),
+                      width: context.dynamicWidth(0.15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Icons.leaderboard),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 4),
                     child: CustomButton(
                       onPressed: () => viewModel.marketButton(),
                       backgroundColor: Color(0xff2751B8),
