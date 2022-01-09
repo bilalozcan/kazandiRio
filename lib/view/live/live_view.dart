@@ -9,8 +9,9 @@ import 'package:stacked/stacked.dart';
 import 'package:kazandirio/core/extension/context_extension.dart';
 
 class LiveView extends StatelessWidget {
-  const LiveView({Key? key, required this.eventId}) : super(key: key);
+  const LiveView({Key? key, required this.eventId,required this.category}) : super(key: key);
   final String eventId;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +107,7 @@ class LiveView extends StatelessWidget {
                                                         'username': viewModel.user.fullName,
                                                         'status':true
                                                       };
-                                                      viewModel.addMeesage(map, code.id!, context);
+                                                      viewModel.addMeesage(map, code.id!, context,category);
                                                     }
                                                   },
                                                   child: Padding(

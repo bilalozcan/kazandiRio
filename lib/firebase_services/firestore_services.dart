@@ -16,8 +16,8 @@ class FirestoreServiceApp {
   Stream getEventsStream(){
     return firestore.collection('events').snapshots();
   }
-  Future<QuerySnapshot<Map<String, dynamic>>> getGameRooms() async{
-    return await firestore.collection('gameRoom').where('status',isEqualTo: 'search').get();
+  Future<QuerySnapshot<Map<String, dynamic>>> getGameRooms(String eventId) async{
+    return await firestore.collection('gameRoom').where('status',isEqualTo: 'search').where('eventId',isEqualTo:eventId ).get();
   }
   Stream getGameRoom(String id){
     return firestore.collection('gameRoom').doc(id).snapshots();
