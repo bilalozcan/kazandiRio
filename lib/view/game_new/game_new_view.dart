@@ -21,7 +21,7 @@ class GameNewView extends StatelessWidget {
           return Scaffold(
             backgroundColor: Color(0xffEEEEEE),
             appBar: AppBar(
-              title: CustomText('KazandıRio Etkinlik : Spor', fontWeight: FontWeight.w500, fontSize: 18),
+              title: CustomText('KazandıRio Etkinlik : $category', fontWeight: FontWeight.w500, fontSize: 18),
               centerTitle: true,
               backgroundColor: Colors.white,
               elevation: 0,
