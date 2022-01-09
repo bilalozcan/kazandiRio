@@ -53,7 +53,7 @@ class EventView extends StatelessWidget {
                     child: CustomButton(
                       onPressed: () => viewModel.marketButton(),
                       backgroundColor: Color(0xff2751B8),
-                      width: context.dynamicWidth(0.27),
+                      width: context.dynamicWidth(0.28),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -1,16 +1,52 @@
-# kazandirio
+# KazandıRio | EğlendiRio
 
-KazandıRio Application
+PepsiCo tarafından geliştirilen KazandıRio uygulamasının KazandıRio Hackathon kapsamında sürdürülebilir bir çözüm eklenmesi.
 
-## Getting Started
+Kullanıcıların cips paketlerinden çıkan kodları veya kapak altı kodlarını aktifleştirip hediyelerini aldıktan sonra aynı kod ile farklı kategorilerde olan etkinliklere katılarak puan kazanma, eğlenme ve bilgi kazanma fırsatı yakalıyor.
 
-This project is a starting point for a Flutter application.
+Kullanıcılar aktifleştirilmiş kodlarını etkinlik akış ekranında yeniden kullanarak farklı kullanıcılar ile eşleşerek çeşitli oyunlar oynuyor.
 
-A few resources to get you started if this is your first Flutter project:
+Oyunu kazanan kullanıcı isterse puanı alıp yarışmayı tamamlayabilir. İsterse de puanını katlamak için yarışmaya devam edebilir.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Kaybeden kullanıcı yeni bir kod aktifleştirerek devam etme şansına sahiptir.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Kullanıcılar biriken puanları ile marketden istediği hediyeyi seçebilir.
+
+Yenilenebilir kod ile hem eğlenip hem kazanma fırsatı elde etmiş oluyorlar.
+## Uygulama Ekran Görüntüleri
+
+Açılış             |  Ana Sayfa
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/splash.png "Açılış") | ![alt text](/screenshot/home.png "Market")
+
+Kayıt Ol             |  Giriş Yap
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/register.png "Kayıt Ol") | ![alt text](/screenshot/login.png "Giriş Yap")
+
+Kampanya Detay             |  Okut Kazan
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/campaignDetail.png "Kampanya Detay ") | ![alt text](/screenshot/codeRedeem.png "Okut Kazan")
+
+Cüzdan                     |  Profil
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/wallet.png "Cüzdan") | ![alt text](/screenshot/profile.png "Profil")
+
+Etkinlikler          |  Market
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/events.png "Etkinlikler") | ![alt text](/screenshot/market.png "Market")
+
+Akış             |  Kod Yeniden Kullanma
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/flow.png "Akış") | ![alt text](/screenshot/code.png "Kod")
+
+Eşleşme             |  Soru
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/vs.png "Eşleşme") | ![alt text](/screenshot/question.png "Soru")
+
+Kazanan             |  Kaybeden
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/win.png "Kazanan") | ![alt text](/screenshot/lose.png "Kaybeden")
+
+Kazanan             |  Kaybeden
+:-------------------------:|:-------------------------:
+![alt text](/screenshot/leaderboard.png "Kazanan") | ![alt text](/screenshot/leaderboard.png "Kaybeden")
