@@ -13,6 +13,11 @@ Kaybeden kullanıcı yeni bir kod aktifleştirerek devam etme şansına sahiptir
 Kullanıcılar biriken puanları ile marketden istediği hediyeyi seçebilir.
 
 Yenilenebilir kod ile hem eğlenip hem kazanma fırsatı elde etmiş oluyorlar.
+
+## Android APK
+
+[![Foo](/screenshot/android.png)](https://drive.google.com/file/d/1UWC6wghJ1uj-WjxRvmWLn5Jg-4BSV4M3/view?usp=sharing)
+
 ## Uygulama Ekran Görüntüleri
 
 Açılış             |  Ana Sayfa
