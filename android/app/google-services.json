@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "933637299929",
+    "project_id": "kazandirio-mobuni",
+    "storage_bucket": "kazandirio-mobuni.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933637299929:android:c207ebcd2b9aa87479a8c8",
+        "android_client_info": {
+          "package_name": "com.mobuni.kazandirio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933637299929-s8lc6a2b7fijccghf6dq3s4n95evadok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2R1Kz1AG0WgtIuOYPYoIBbb4qqNUNC-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933637299929-s8lc6a2b7fijccghf6dq3s4n95evadok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

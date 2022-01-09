@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:date_format/date_format.dart';
 
 extension ContextExtension on BuildContext {
   ThemeData get themeData => Theme.of(this);
@@ -26,12 +27,19 @@ extension ContextExtension on BuildContext {
   Future navigateTo(Widget widget) async =>
       Navigator.push(this, MaterialPageRoute(builder: (context) => widget));
 
+  Future navigateToReplacement(Widget widget) async =>
+      Navigator.pushReplacement(this, MaterialPageRoute(builder: (context) => widget));
+
+
+  Future navigateToRemoveUntil(Widget widget) async =>
+      Navigator.pushAndRemoveUntil(this, MaterialPageRoute(builder: (context) => widget),(r) => false);
+
   // String formatDateToTime(DateTime? dateTime) =>
   //     formatDate(dateTime!, [HH, ':', nn],
   //         locale: TurkishDateLocale());
-  // String customFormatDate2(DateTime? dateTime) =>
-  //     formatDate(dateTime!, [dd, ' ', MM, ' ', yyyy],
-  //         locale: TurkishDateLocale());
+  String customFormatDate2(DateTime? dateTime) =>
+      formatDate(dateTime!, [dd, '.', mm, '.', yyyy],
+          locale: TurkishDateLocale());
 
   void pop<T extends Object?>([T? result]) => Navigator.pop(this, result);
 }

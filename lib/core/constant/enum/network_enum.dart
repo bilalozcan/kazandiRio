@@ -1,3 +1,8 @@
 enum Network {
-  LOGIN
+  LOGIN,
+  VALIDATE,
+  PROFILE,
+  CAMPAIGNS,
+  CODE,
+  REDEEM
 }
