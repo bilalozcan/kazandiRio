@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kazandirio/core/extension/context_extension.dart';
 import 'package:kazandirio/view/game/delayed_animation.dart';
 import 'package:kazandirio/view/game/game_view_model.dart';
+import 'package:kazandirio/view/game_new/game_new_view.dart';
 import 'package:stacked/stacked.dart';
 
 class GameView extends StatelessWidget {
@@ -37,36 +39,59 @@ class GameView extends StatelessWidget {
                     //             .headline5
                     //             ?.copyWith(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)))
                   ]),
-                  DelayedAnimation(
+                 if(viewModel.roomId!=null) DelayedAnimation(
                     curve: Curves.decelerate,
                     delayedAnimation: 1100,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                            alignment: Alignment.center,
-                            width: context.dynamicWidth(0.425),
-                            child: Text(name1,
-                                style: Theme.of(context).textTheme.headline6?.copyWith(color: Color(0xff50b4a8)))),
-                        SizedBox(
-                            width: context.dynamicWidth(0.15),
-                            child: Text('VS',
-                                style: Theme.of(context).textTheme.headline3?.copyWith(
-                                    color: Color(0xff572540),
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FontStyle.italic))),
-                        viewModel.initialised?Container(
-                            alignment: Alignment.center,
-                            width: context.dynamicWidth(0.425),
-                            child: Text('dsfsd',
-                                style: Theme.of(context).textTheme.headline6?.copyWith(color: Color(0xff4d81d7)))):
-                        Container(
-                            alignment: Alignment.center,
-                            width: context.dynamicWidth(0.425),
-                            child: Text('',
-                                style: Theme.of(context).textTheme.headline6?.copyWith(color: Color(0xff4d81d7))))
-                      ],
-                    ),
+                    child: StreamBuilder(
+                      stream: viewModel.firestoreService.getGameRoomStream(viewModel.roomId!),
+                      builder: (context,dynamic sn){
+                        var data={};
+                        var user1 ='';
+                        var user2 = '';
+                        if(sn.hasData){
+                          data = sn.data.data();
+                          user1 = data['users'].elementAt(0)['name']??'';
+                          if(data['users'].length>1)
+                          user2 = data['users'].elementAt(1)['name']??'';
+                          if(user1!=''&&user2!=''&&viewModel.roomId!=null){
+                              Future.delayed(Duration(seconds: 3)).then((value) async{
+                                viewModel.firestoreService.firestore.collection('gameRoom').doc(viewModel.roomId!).update({
+                                  'status':'GAME'
+                                });
+                                context.navigateToReplacement(GameNewView(gameRoomId:viewModel.roomId! ));
+                              });
+
+                          }
+                        }
+                        return sn.hasData?Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                                alignment: Alignment.center,
+                                width: context.dynamicWidth(0.425),
+                                child: Text(user1,
+                                    style: Theme.of(context).textTheme.headline6?.copyWith(color: Color(0xff50b4a8)))),
+                            SizedBox(
+                                width: context.dynamicWidth(0.15),
+                                child: Text('VS',
+                                    style: Theme.of(context).textTheme.headline3?.copyWith(
+                                        color: Color(0xff572540),
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic))),
+                            viewModel.initialised?Container(
+                                alignment: Alignment.center,
+                                width: context.dynamicWidth(0.425),
+                                child: Text(user2,
+                                    style: Theme.of(context).textTheme.headline6?.copyWith(color: Color(0xff4d81d7)))):
+                            Container(
+                                alignment: Alignment.center,
+                                width: context.dynamicWidth(0.425),
+                                child: Text('',
+                                    style: Theme.of(context).textTheme.headline6?.copyWith(color: Color(0xff4d81d7))))
+                          ],
+                        ):Container();
+                      },
+                    )
                   ),
                   DelayedAnimation(
                     curve: Curves.decelerate,

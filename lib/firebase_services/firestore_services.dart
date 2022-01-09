@@ -22,6 +22,9 @@ class FirestoreServiceApp {
   Stream getGameRoom(String id){
     return firestore.collection('gameRoom').doc(id).snapshots();
   }
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getGameRoomStream(String id){
+    return firestore.collection('gameRoom').doc(id).snapshots();
+  }
   Stream getLivesStream(String id){
     return firestore.collection('eventLive').doc(id).collection('live').orderBy('date',descending: true).snapshots();
   }

@@ -13,14 +13,7 @@ import 'package:stacked/stacked.dart';
 class GameViewModel extends BaseViewModel {
   FirestoreServiceApp firestoreService = FirestoreServiceApp.instance!;
   BaseData baseData = BaseData.instance!;
-  var _rivalUser;
 
-  get rivalUser => _rivalUser;
-
-  set rivalUser(value) {
-    _rivalUser = value;
-    notifyListeners();
-  }
 
   String? _roomId;
 
@@ -31,95 +24,60 @@ class GameViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  init(String docId, BuildContext context) {
-    setInitialised(true);
-    var res = firestoreService.getGameRooms().then((value) {
+  bool _twoUserControl=false;
+
+  bool get twoUserControl => _twoUserControl;
+
+  set twoUserControl(bool value) {
+    _twoUserControl = value;
+    notifyListeners();
+  }
+
+  init(String docId, BuildContext context) async {
+    setInitialised(false);
+    var res = await firestoreService.getGameRooms().then((value) {
       if (value.docs.isNotEmpty) {
-        value.docs.forEach((element) {
-          var data = element.data();
-          bool control = false;
+        bool control = false;
+        for (var data1 in value.docs) {
+          var data = data1.data();
           if (data['users'].length < 2) {
             control = true;
             roomId = data['id'];
             firestoreService.firestore.collection('gameRoom').doc(data['id']).update({
-              'users': FieldValue.arrayUnion([baseData.user!.id!]),
+              'users': FieldValue.arrayUnion([
+                {'id': baseData.user!.id!, 'name': baseData.user!.fullName}
+              ]),
             });
+            break;
           }
-          if (!control) {
-            var id = generateRandomString(20);
-            firestoreService.firestore.collection('gameRoom').doc(id).set({
-              'id': id,
-              'status': 'search',
-              'users': FieldValue.arrayUnion([baseData.user!.id!]),
-            });
-            roomId = id;
-          }
-        });
+        }
+        if (!control) {
+          var id = generateRandomString(20);
+          firestoreService.firestore.collection('gameRoom').doc(id).set({
+            'id': id,
+            'status': 'search',
+            'users': FieldValue.arrayUnion([
+              {'id': baseData.user!.id!, 'name': baseData.user!.fullName}
+            ]),
+          });
+          roomId = id;
+        }
       } else {
         var id = generateRandomString(20);
         firestoreService.firestore.collection('gameRoom').doc(id).set({
           'id': id,
           'status': 'search',
-          'users': FieldValue.arrayUnion([baseData.user!.id!]),
+          'users': FieldValue.arrayUnion([
+            {'id': baseData.user!.id!, 'name': baseData.user!.fullName}
+          ]),
         });
         roomId = id;
       }
     });
-    // StreamController streamController= StreamController();
-    // var streamRoom =  streamRoomControl();
-    // streamRoom.pipe(streamController);
-    // streamRoom.forEach((element) {
-    //   if (element.docs.isEmpty) {
-    //     var id = generateRandomString(20);
-    //     firestoreService.firestore.collection('gameRoom').doc(id).set({
-    //       'id': id,
-    //       'status': 'search',
-    //       'users': FieldValue.arrayUnion([baseData.user!.id!]),
-    //     });
-    //     streamController.close();
-    //   } else
-    //     element.docs.forEach((element) {
-    //       var data = element.data();
-    //       bool control = false;
-    //       if (data['users'].length < 2) {
-    //         control = true;
-    //         firestoreService.firestore.collection('gameRoom').doc(data['id']).update({
-    //           'users': FieldValue.arrayUnion([baseData.user!.id!]),
-    //         });
-    //         streamController.close();
-    //       }
-    //       if (!control) {
-    //         var id = generateRandomString(20);
-    //         firestoreService.firestore.collection('gameRoom').doc(id).set({
-    //           'id': id,
-    //           'status': 'search',
-    //           'users': FieldValue.arrayUnion([baseData.user!.id!]),
-    //         });
-    //         streamController.close();
-    //       }
-    //     });
-    // });
+    setInitialised(true);
+    notifyListeners();
 
-    // while(rivalUser==null){
-    //   var data =  await firestoreService.getLivesUserStreamCode(docId,baseData.user!.id!).then((value) {
-    //     if(value.docs.isNotEmpty){
-    //       rivalUser = value.docs.first.data();
-    //     }
-    //   });
-    // }
-    // setInitialised(true);
-    // notifyListeners();
-    // if(rivalUser!=null){
-    //   Future.delayed(Duration(seconds: 3)).then((value) async{
-    //     var id = generateRandomString(20);
-    //    await firestoreService.firestore.collection('gameRoom').doc(id).set({
-    //       'user2':rivalUser['senderId'],
-    //       'user1':baseData.user!.id,
-    //       'status':'GAME',
-    //     });
-    //    context.navigateToReplacement(GameNewView(gameRoomId:id ));
-    //   });
-    // }
+
   }
 
   String generateRandomString(int len) {
