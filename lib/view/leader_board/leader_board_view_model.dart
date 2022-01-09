@@ -17,7 +17,7 @@ class LeaderBoardViewModel extends CustomBaseViewModel{
   void initialize(BuildContext context) async {
     setInitialised(false);
     this.context = context;
-    leaderTableList = await firestoreService.firestore.collection('leaderBoard').orderBy('point').get().then((value){
+    leaderTableList = await firestoreService.firestore.collection('leaderBoard').orderBy('point',descending: true).get().then((value){
       var list=[];
       if(value.docs.isNotEmpty){
         for(var i in value.docs){
