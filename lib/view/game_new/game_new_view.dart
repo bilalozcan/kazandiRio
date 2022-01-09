@@ -8,14 +8,15 @@ import 'package:kazandirio/widgets/custom_text.dart';
 import 'package:stacked/stacked.dart';
 
 class GameNewView extends StatelessWidget {
-  const GameNewView({Key? key, required this.gameRoomId}) : super(key: key);
+  const GameNewView({Key? key, required this.gameRoomId,required this.category}) : super(key: key);
   final String gameRoomId;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<GameNewViewModel>.reactive(
         viewModelBuilder: () => GameNewViewModel(),
-        onModelReady: (model) => model.init('spor'),
+        onModelReady: (model) => model.init(category),
         builder: (context, viewModel, child) {
           return Scaffold(
             backgroundColor: Color(0xffEEEEEE),

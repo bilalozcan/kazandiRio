@@ -64,18 +64,18 @@ class LiveViewModel extends BaseViewModel{
    });
   }
 
-  addMeesage(var map,String codeId,BuildContext context)async {
+  addMeesage(var map,String codeId,BuildContext context,String category)async {
     await firestoreService.addMessage(map, eventId,codeId,user.id!);
     var list = ['spor','teknoloji','genel kültür'];
     var rng = new Random();
     try{
       await Future.delayed(Duration(seconds: 2)).then((value)async{
-        await context.navigateTo(GameView(evetId: eventId,codePoint: map['point'],));
+        await context.navigateTo(GameView(evetId: eventId,codePoint: map['point'],category:category ,));
       });
       notifyListeners();
     }
     catch(e){
-      await context.navigateTo(GameView(evetId: eventId,codePoint: map['point'],));
+      await context.navigateTo(GameView(evetId: eventId,codePoint: map['point'],category:category));
     }
 
   }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:kazandirio/core/base/base_data.dart';
 import 'package:kazandirio/firebase_services/firestore_services.dart';
@@ -32,7 +34,9 @@ class GameNewViewModel extends BaseViewModel{
     while(question==null){
       question =await firestoreService.getQuestion(category).then((value) {
         if(value.docs.isNotEmpty){
-          return value.docs.first.data();
+          var rnd  = Random();
+          var index = rnd.nextInt(value.docs.length);
+          return value.docs[index].data();
         }
         else return null;
       });

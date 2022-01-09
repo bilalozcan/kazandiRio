@@ -122,6 +122,8 @@ class EventView extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
                             data['title'],
@@ -129,6 +131,13 @@ class EventView extends StatelessWidget {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
+                          ),
+                          Text(
+                            data['category'],
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15),
                           ),
                         ],
                       ),
@@ -197,6 +206,7 @@ class EventView extends StatelessWidget {
                     if (viewModel.baseData.user != null)
                       context.navigateTo(LiveView(
                         eventId: data['id'],
+                        category: data['category'],
                       ));
                     else {
                       context.navigateTo(RegisterView());
